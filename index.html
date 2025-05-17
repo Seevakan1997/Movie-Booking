@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie Library</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <img src="assets/Logos/Logo White.svg" alt="Logoipsum">
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">OUR SCREENS</a></li>
+          <li><a href="#">SCHEDULE</a></li>
+          <li><a href="#">GALLERY</a></li>
+          <li><a href="#">LOCATION & CONTACT</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
+          <span></span><span></span><span></span>
+        </div>
+      </nav>
+    </div>
+    <div class="side-menu" id="sideMenu">
+      <span class="close" id="closeMenu" aria-label="Close menu" tabindex="0">&times;</span>
+      <a href="#">HOME</a>
+      <a href="#">OUR SCREENS</a>
+      <a href="#">SCHEDULE</a>
+      <a href="#">GALLERY</a>
+      <a href="#">LOCATION & CONTACT</a>
+    </div>
+  </header>
+
+  <!-- Main Visual -->
+  <section class="main-visual">
+    <div class="main-visual-crop">
+      <img src="assets/Images/Header Image.jpg" alt="Theater">
+    </div>
+  </section>
+
+  <!-- Site Introduction OUTSIDE container -->
+  <section class="intro-row">
+    <div class="intro">
+      <h1>MOVIE LIBRARY</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur sadipscing elit,<br>
+      sed diam nonumy eirmod tempor invidunt ut labore et<br>
+      dolore magna aliquyam erat, sed diam voluptua.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Quick Info (Vue.js App) -->
+    <section id="app" class="quick-info">
+      <div class="quick-info-header">
+        <h2>Collect your favourites</h2>
+        <div class="search-bar">
+          <input v-model="searchQuery" @keyup.enter="searchMovies" placeholder="Search movies and add to grid">
+          <span class="search-icon"></span>
+        </div>
+      </div>
+      <hr class="quick-info-divider">
+      <div class="movie-grid">
+        <div class="movie-card" v-for="(movie, index) in displayedMovies" :key="movie.id">
+          <img :src="movie.image" :alt="movie.title">
+          <button class="remove-btn" @click="removeMovie(index)">×</button>
+          <div class="movie-meta">
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us & Map -->
+    <section class="contact-map-section">
+      <div class="contact">
+        <h2>How to reach us</h2>
+        <p class="contact-desc">Lorem ipsum dolor sit amet, consectetur.</p>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name*" required>
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name*" required>
+          </div>
+          <input type="email" id="email" name="email" placeholder="Email*" required>
+          <input type="tel" id="phone" name="phone" placeholder="Telephone">
+          <textarea id="message" name="message" placeholder="Message*" required></textarea>
+          <div class="form-row checkbox-row">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.073146655412!2d-3.636099684602747!3d40.44522297936213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422e7e2e7e7e7e%3A0x7e7e7e7e7e7e7e7e!2sC.%20Salvador%20de%20Madariaga%2C%201%2C%2028027%20Madrid%2C%20Spain!5e0!3m2!1sen!2sbe!4v1680000000000!5m2!1sen!2sbe"
+          width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <p>Amadeus IT Group<br> C. Salvador de Madariaga 1<br> 28027 Madrid<br>Spain</p>
+      </div>
+      <div class="social">
+        <span>Follow us on</span>
+        <a href="#">&#xf09a;</a>
+        <a href="#">&#xf099;</a>
+        <a href="#">&#xf16d;</a>
+      </div>
+    </div>
+    <p class="copyright">Copyright &copy; 2025 Amadeus Media. All rights reserved.</p>
+    <p class="footer-links">
+      <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms & Conditions</a> &nbsp;|&nbsp; <a href="#">Unsplash</a>
+    </p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
