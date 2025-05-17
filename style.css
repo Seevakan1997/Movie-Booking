@@ -19,7 +19,7 @@ header {
 .header-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 12px;
   height: 56px;
   display: flex;
   align-items: center;
@@ -112,8 +112,8 @@ nav { display: flex; align-items: center; }
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 12px;
+  padding-right: 12px;
   box-sizing: border-box;
 }
 
@@ -132,7 +132,7 @@ nav { display: flex; align-items: center; }
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2.5rem 0 1.5rem 0;
+  padding: 2.5rem 12px 1.5rem 12px;
   box-sizing: border-box;
 }
 .intro h1 {
@@ -144,13 +144,12 @@ nav { display: flex; align-items: center; }
 }
 .intro p {
   margin-top: 1rem;
-  color: #ffc107;
+  color: #8d8d8d;
   font-size: 0.95rem;
   line-height: 1.5;
   max-width: 95%;
   font-weight: 400;
 }
-
 
 /* Quick Info */
 .quick-info {
@@ -374,7 +373,7 @@ footer {
 .footer-content {
   max-width: 1100px;
   margin: auto;
-  padding: 1.1rem 32px 0.5rem 32px;
+  padding: 1.1rem 12px 0.5rem 12px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -427,8 +426,8 @@ footer {
 @media (max-width: 1200px) {
   .container, .footer-content, .header-inner {
     max-width: 98vw;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
 @media (max-width: 900px) {
@@ -442,16 +441,14 @@ footer {
   .intro { width: 100%; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
-  .main-visual-crop { height: 160px; }
-  .main-visual-crop img { height: 320px; }
+  .main-visual-crop { height: 300px; }
 }
 @media (max-width: 700px) {
   .container, .footer-content, .header-inner {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 4px;
+    padding-right: 4px;
   }
-  .main-visual-crop { height: 90px; }
-  .main-visual-crop img { height: 180px; }
+  .main-visual-crop { height: 200px; }
   .movie-grid { grid-template-columns: 1fr; }
   .movie-card { width: 100%; }
   .form-row { flex-direction: column; gap: 0; }
@@ -469,8 +466,8 @@ footer {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-  .main-visual-crop { height: 60px; }
-  .main-visual-crop img { height: 120px; }
+  .main-visual-crop { height: 300px; }
+  
   .movie-card { width: 100%; }
   .form-row { flex-direction: column; gap: 0; }
   .quick-info-header { flex-direction: column; align-items: stretch; }
