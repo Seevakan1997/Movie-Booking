@@ -722,6 +722,7 @@ footer {
   .footer-copyright {
     align-items: center;
     text-align: center;
+    justify-content: center;
   }
   .footer-bottom{
     padding-top: 20px;
