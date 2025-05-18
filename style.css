@@ -288,13 +288,13 @@ nav { display: flex; align-items: center; }
 .contact h2 {
   margin-top: 0;
   margin-bottom: 0.3rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
 }
 .contact-desc {
-  color: #fff;
-  font-size: 0.85rem;
+  color: rgb(183, 183, 183);
+  font-size: 0.92rem;
   margin-bottom: 1.1rem;
   margin-top: 0;
 }
@@ -302,6 +302,12 @@ form { width: 100%; }
 .form-row {
   display: flex;
   gap: 0.7rem;
+}
+.contact form label {
+  color: rgb(183, 183, 183);
+  font-size: 0.92rem;
+  margin-bottom: 0.18rem;
+  letter-spacing: 0.5px;
 }
 .form-row input {
   flex: 1 1 0;
@@ -313,12 +319,12 @@ input, textarea {
   border: none;
   border-radius: 2px;
   font-size: 0.95rem;
-  background: #e0e0e0;
+  background:rgb(60, 60, 60);
   color: #222;
   box-sizing: border-box;
   font-family: inherit;
   outline: none;
-  border: 1px solid #bbb;
+  border: 1px solid rgb(60, 60, 60);
   transition: border 0.2s;
 }
 input:focus, textarea:focus {
@@ -329,8 +335,16 @@ input[type="checkbox"] {
   margin-bottom: 0;
   accent-color: #ffc107;
 }
+.required-fields-note {
+  color: rgb(60, 60, 60);
+  font-size: 0.92rem;
+  
+  margin-bottom: 0.18rem;
+  letter-spacing: 0.5px;
+}
 .checkbox-row {
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   gap: 0.5rem;
   margin-bottom: 1rem;
   font-size: 0.9rem;
@@ -340,16 +354,22 @@ input[type="checkbox"] {
   font-size: 0.9rem;
 }
 .checkbox-row a {
-  color: #ffc107;
+  color: #ffffff;
   text-decoration: underline;
 }
 textarea {
   min-height: 70px;
   resize: vertical;
 }
+
+.required-fields-note {
+  color: #fff;
+  margin-bottom: 0.7rem;
+  margin-top: -0.5rem;
+}
 button[type="submit"] {
   background: #ffc107;
-  color: #000;
+  color: #ffffff;
   border: none;
   padding: 0.55rem 1.6rem;
   border-radius: 2px;
@@ -359,20 +379,24 @@ button[type="submit"] {
   margin-top: 0.2rem;
   letter-spacing: 0.5px;
   transition: background 0.2s;
+  display: block;
+  margin-left: auto; /* Pushes the button to the right */
+  margin-right: 0;
+  
 }
 button[type="submit"]:hover { background: #e0b106; }
 .map {
   flex: 0 1 650px;
   max-width: 650px;
   min-width: 250px;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
 }
 .map iframe {
   width: 100%;
-  min-height: 250px;
+  min-height: 440px;
   border-radius: 3px;
   border: 1px solid #222;
 }
@@ -380,7 +404,7 @@ button[type="submit"]:hover { background: #e0b106; }
 /* Footer */
 footer {
   width: 100vw;
-  background: #111;
+  background: rgb(29, 29, 29);
   color: #ccc;
   text-align: center;
   padding: 0;

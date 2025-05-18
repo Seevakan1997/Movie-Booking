@@ -87,13 +87,31 @@
       <p class="contact-desc">Lorem ipsum dolor sit amet, consectetur.</p>
       <form id="contactForm" novalidate>
         <div class="form-row">
-          <input type="text" id="firstName" name="firstName" placeholder="First Name*" required aria-required="true">
-          <input type="text" id="lastName" name="lastName" placeholder="Last Name*" required aria-required="true">
+          <div>
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName"  required aria-required="true">
+          </div>
+
+          <div>
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName"  required aria-required="true">
+          </div>
         </div>
-        <input type="email" id="email" name="email" placeholder="Email*" required aria-required="true">
-        <input type="tel" id="phone" name="phone" placeholder="Telephone">
-        <textarea id="message" name="message" placeholder="Message*" required aria-required="true"></textarea>
-        <div class="form-row checkbox-row">
+        
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email"  required aria-required="true">
+
+        <label for="phone">Telephone</label>
+        <input type="tel" id="phone" name="phone">
+
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" required aria-required="true"></textarea>
+        
+          <div class="required-fields-note">
+            <label for="required">* required fields</label>
+          </div>
+
+        <div class="checkbox-row">
           <input type="checkbox" id="terms" required aria-required="true">
           <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
         </div>
@@ -114,9 +132,8 @@
       </div>
       <div class="social">
         <span>Follow us on</span>
-        <a href="#" aria-label="Facebook">&#xf09a;</a>
         <a href="#" aria-label="Twitter">&#xf099;</a>
-        <a href="#" aria-label="Instagram">&#xf16d;</a>
+        <a href="#" aria-label="YouTube">&#xf16a;</a>
       </div>
     </div>
     <p class="copyright">Copyright &copy; 2025 Amadeus Media. All rights reserved.</p>
