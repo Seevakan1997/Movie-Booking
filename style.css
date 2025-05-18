@@ -8,6 +8,14 @@ body {
 }
 img { max-width: 100%; display: block; }
 
+.sidebar-link {
+  display: none !important;
+}
+
+.nav-links li {
+  display: none !important;
+}
+
 /* Header */
 header {
   width: 100vw;
@@ -64,7 +72,7 @@ nav { display: flex; align-items: center; }
   border-radius: 2px;
   transition: 0.3s;
 }
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   .nav-links { display: none; }
 }
 .side-menu {
@@ -83,6 +91,9 @@ nav { display: flex; align-items: center; }
   position: absolute; top: 1rem; right: 1rem;
   font-size: 2rem; cursor: pointer; color: #fff;
 }
+
+
+
 
 /* Main Visual */
 .main-visual {
@@ -543,12 +554,22 @@ footer {
   color: #ffc107;
 }
 
+
 /* Responsive Styles */
 @media (max-width: 1200px) {
   .container, .footer-main, .footer-bottom, .header-inner {
     max-width: 98vw;
     padding-left: 8px;
     padding-right: 8px;
+  }
+  .gallery-only { display: block !important; }
+  
+}
+
+@media (min-width: 1025px) {
+  .gallery-only { display: block !important; }
+  .nav-links li {
+    display: inline-block !important;
   }
 }
 
@@ -567,6 +588,16 @@ footer {
   .map iframe {
     min-height: 250px;
   }
+  .gallery-only { display: block !important; }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .tablet-mobile-only { display: block !important; }
+  .gallery-only { display: none !important; }
+
+  .nav-links .tablet-nav {
+    display: inline-block !important;
+  }
 }
 
 @media (max-width: 900px) {
@@ -578,7 +609,6 @@ footer {
 
   }
   .footer-main,
-
   .footer-social {
     margin-right: 0;
     margin-top: 1.2rem;
@@ -599,6 +629,7 @@ footer {
     color: rgb(183, 183, 183);
   }
   
+  .tablet-mobile-only { display: block !important; }
 
   .contact-map-section {
     flex-direction: column;
@@ -677,7 +708,7 @@ footer {
     color: rgb(183, 183, 183);
   }
   
-  
+
 }
 
 @media (max-width: 600px) {
@@ -736,5 +767,15 @@ footer {
   .search-bar {
     width: 100%;
     min-width: 0;
+  }
+  
+}
+
+@media (max-width: 700px) {
+  .mobile-only,
+  .tablet-mobile-only { display: block !important; }
+  .gallery-only { display: none !important; }
+  .nav-links li {
+    display: none !important;
   }
 }

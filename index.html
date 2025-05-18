@@ -17,11 +17,11 @@
       </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="#">HOME</a></li>
-          <li><a href="#">OUR SCREENS</a></li>
-          <li><a href="#">SCHEDULE</a></li>
-          <li><a href="#">MOVIE LIBRARY</a></li>
-          <li><a href="#">LOCATION & CONTACT</a></li>
+          <li class="tablet-nav"><a href="#">HOME</a></li>
+          <li class="tablet-nav"><a href="#">OUR SCREENS</a></li>
+          <li class="tablet-nav"><a href="#">SCHEDULE</a></li>
+          <li class="tablet-nav"><a href="#">MOVIE LIBRARY</a></li>
+          <li class="desktop-only"><a href="#">LOCATION & CONTACT</a></li>
         </ul>
         <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0">
           <span></span><span></span><span></span>
@@ -30,12 +30,14 @@
     </div>
     <div class="side-menu" id="sideMenu">
       <span class="close" id="closeMenu" aria-label="Close menu" tabindex="0">&times;</span>
-      <a href="#">HOME</a>
-      <a href="#">OUR SCREENS</a>
-      <a href="#">SCHEDULE</a>
-      <a href="#">MOVIE LIBRARY</a>
-      <a href="#">LOCATION & CONTACT</a>
-      <a href="#">GALLERY</a>
+      <a href="#" class="sidebar-link gallery-only">GALLERY</a>
+      <a href="#" class="sidebar-link mobile-only">HOME</a>
+      <a href="#" class="sidebar-link mobile-only">OUR SCREENS</a>
+      <a href="#" class="sidebar-link mobile-only">SCHEDULE</a>
+      <a href="#" class="sidebar-link mobile-only">MOVIE LIBRARY</a>
+      <a href="#" class="sidebar-link tablet-mobile-only">LOCATION & CONTACT</a>
+      <a href="#" class="sidebar-link tablet-mobile-only">GALLERY</a>
+      
     </div>
   </header>
 
