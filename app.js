@@ -23,59 +23,73 @@ new Vue({
   el: "#app",
   data: {
     searchQuery: "",
-    displayedMovies: [
-      {
-        id: 1,
-        title: "Batman Returns",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "assets/batman.jpg",
-      },
-      {
-        id: 2,
-        title: "Wild Wild West",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "assets/wildwest.jpg",
-      },
-      {
-        id: 3,
-        title: "The Amazing Spiderman",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "assets/spiderman.jpg",
-      },
-    ],
+    displayedMovies: [],
+    tmdbApiKey: "YOUR_TMDB_API_KEY" // <-- Replace with your TMDB API key
+  },
+  created() {
+    // Fetch 3 movies from TVMaze API as initial dummy data
+    fetch("https://api.tvmaze.com/shows")
+      .then(res => res.json())
+      .then(data => {
+        // Use the first 3 shows as initial movies
+        this.displayedMovies = data.slice(0, 3).map(show => ({
+          id: show.id,
+          title: show.name,
+          description: show.summary ? show.summary.replace(/<[^>]+>/g, "") : "No description.",
+          image: show.image ? show.image.medium : "assets/default.jpg"
+        }));
+      });
   },
   methods: {
     searchMovies() {
       if (!this.searchQuery.trim()) return;
+      // Search TVMaze first
       fetch(
-        `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(
-          this.searchQuery
-        )}`
+        `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(this.searchQuery)}`
       )
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           if (data.length > 0) {
             const show = data[0].show;
-            if (!this.displayedMovies.some((m) => m.title === show.name)) {
+            if (!this.displayedMovies.some(m => m.id === show.id)) {
               this.displayedMovies.push({
                 id: show.id,
                 title: show.name,
-                description: show.summary
-                  ? show.summary.replace(/<[^>]+>/g, "")
-                  : "No description.",
-                image: show.image ? show.image.medium : "assets/default.jpg",
+                description: show.summary ? show.summary.replace(/<[^>]+>/g, "") : "No description.",
+                image: show.image ? show.image.medium : "assets/default.jpg"
               });
             }
           } else {
-            alert("No movie found!");
+            // If not found in TVMaze, try TMDB
+            fetch(
+              `https://api.themoviedb.org/3/search/movie?api_key=${this.tmdbApiKey}&query=${encodeURIComponent(this.searchQuery)}`
+            )
+              .then(res => res.json())
+              .then(data => {
+                if (data.results && data.results.length > 0) {
+                  const movie = data.results[0];
+                  if (!this.displayedMovies.some(m => m.id === movie.id)) {
+                    this.displayedMovies.push({
+                      id: movie.id,
+                      title: movie.title,
+                      description: movie.overview || "No description.",
+                      image: movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                        : "assets/default.jpg"
+                    });
+                  }
+                } else {
+                  alert("No movie found!");
+                }
+              });
           }
         });
       this.searchQuery = "";
     },
     removeMovie(index) {
       this.displayedMovies.splice(index, 1);
-    },
-  },
+    }
+  }
 });
 
 // Contact Form Validation
