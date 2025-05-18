@@ -6,6 +6,7 @@
   <title>Movie Library</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Header -->
@@ -62,7 +63,7 @@
         <h2>Collect your favourites</h2>
         <div class="search-bar">
           <span class="search-icon"></span>
-          <input v-model="searchQuery" @keyup.enter="searchMovies" placeholder="Search movies and add to grid" aria-label="Search movies">
+          <input v-model="searchQuery" @keyup.enter="searchMovies" placeholder="Search title and add to grid" aria-label="Search movies">
         </div>
       </div>
       <hr class="quick-info-divider">
