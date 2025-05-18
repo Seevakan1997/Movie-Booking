@@ -1,4 +1,4 @@
-// Hamburger menu logic
+// Hamburger menu
 const hamburger = document.getElementById("hamburger");
 const sideMenu = document.getElementById("sideMenu");
 const closeMenu = document.getElementById("closeMenu");
@@ -18,64 +18,123 @@ closeMenu.addEventListener("keydown", (e) => {
   if (e.key === "Enter") closeSideMenu();
 });
 
-// Vue.js App for Movie Grid
+// Vue.js
 new Vue({
   el: "#app",
   data: {
     searchQuery: "",
-    displayedMovies: [],
-    tmdbApiKey: "YOUR_TMDB_API_KEY" // <-- Replace with your TMDB API key
+    displayedMovies: [
+      {
+        id: 1,
+        title: "Batman Returns",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur sadipscing elit, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        image: "assets/Images/Batman.jpg",
+      },
+      {
+        id: 2,
+        title: "Wild Wild West",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur sadipscing elit, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        image: "assets/Images/Wild West.jpg",
+      },
+      {
+        id: 3,
+        title: "The Amazing Spiderman",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur sadipscing elit, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+        image: "assets/Images/Spiderman.jpg",
+      },
+    ],
+    tmdbApiKey: "API_KEY",
+    searchResults: [],
+    showDropdown: false,
+    searching: false,
   },
-  created() {
-    // Fetch 3 movies from TVMaze API as initial dummy data
-    fetch("https://api.tvmaze.com/shows")
-      .then(res => res.json())
-      .then(data => {
-        // Use the first 3 shows as initial movies
-        this.displayedMovies = data.slice(0, 3).map(show => ({
-          id: show.id,
-          title: show.name,
-          description: show.summary ? show.summary.replace(/<[^>]+>/g, "") : "No description.",
-          image: show.image ? show.image.medium : "assets/default.jpg"
-        }));
-      });
+  watch: {
+    searchQuery(newVal) {
+      if (newVal.trim().length > 1) {
+        this.fetchSearchResults(newVal);
+      } else {
+        this.searchResults = [];
+        this.showDropdown = false;
+      }
+    },
   },
   methods: {
+    fetchSearchResults(query) {
+      this.searching = true;
+      // Search
+      fetch(
+        `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          this.searchResults = data.map((item) => ({
+            id: item.show.id,
+            title: item.show.name,
+            description: item.show.summary
+              ? item.show.summary.replace(/<[^>]+>/g, "")
+              : "No description.",
+            image: item.show.image
+              ? item.show.image.medium
+              : "assets/default.jpg",
+          }));
+          this.showDropdown = this.searchResults.length > 0;
+          this.searching = false;
+        });
+    },
+    selectResult(movie) {
+      if (!this.displayedMovies.some((m) => m.id === movie.id)) {
+        this.displayedMovies.push(movie);
+      }
+      this.searchQuery = "";
+      this.searchResults = [];
+      this.showDropdown = false;
+    },
     searchMovies() {
       if (!this.searchQuery.trim()) return;
-      // Search TVMaze first
+      if (this.searchResults.length > 0) {
+        this.selectResult(this.searchResults[0]);
+        return;
+      }
       fetch(
-        `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(this.searchQuery)}`
+        `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(
+          this.searchQuery
+        )}`
       )
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           if (data.length > 0) {
             const show = data[0].show;
-            if (!this.displayedMovies.some(m => m.id === show.id)) {
+            if (!this.displayedMovies.some((m) => m.id === show.id)) {
               this.displayedMovies.push({
                 id: show.id,
                 title: show.name,
-                description: show.summary ? show.summary.replace(/<[^>]+>/g, "") : "No description.",
-                image: show.image ? show.image.medium : "assets/default.jpg"
+                description: show.summary
+                  ? show.summary.replace(/<[^>]+>/g, "")
+                  : "No description.",
+                image: show.image ? show.image.medium : "assets/default.jpg",
               });
             }
           } else {
-            // If not found in TVMaze, try TMDB
             fetch(
-              `https://api.themoviedb.org/3/search/movie?api_key=${this.tmdbApiKey}&query=${encodeURIComponent(this.searchQuery)}`
+              `https://api.themoviedb.org/3/search/movie?api_key=${
+                this.tmdbApiKey
+              }&query=${encodeURIComponent(this.searchQuery)}`
             )
-              .then(res => res.json())
-              .then(data => {
+              .then((res) => res.json())
+              .then((data) => {
                 if (data.results && data.results.length > 0) {
                   const movie = data.results[0];
-                  if (!this.displayedMovies.some(m => m.id === movie.id)) {
+                  if (!this.displayedMovies.some((m) => m.id === movie.id)) {
                     this.displayedMovies.push({
                       id: movie.id,
                       title: movie.title,
                       description: movie.overview || "No description.",
                       image: movie.poster_path
                         ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                        : "assets/default.jpg"
+                        : "assets/default.jpg",
                     });
                   }
                 } else {
@@ -85,11 +144,18 @@ new Vue({
           }
         });
       this.searchQuery = "";
+      this.searchResults = [];
+      this.showDropdown = false;
     },
     removeMovie(index) {
       this.displayedMovies.splice(index, 1);
-    }
-  }
+    },
+    hideDropdown() {
+      setTimeout(() => {
+        this.showDropdown = false;
+      }, 200);
+    },
+  },
 });
 
 // Contact Form Validation

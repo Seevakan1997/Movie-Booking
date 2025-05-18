@@ -46,24 +46,32 @@
     </div>
   </section>
 
-  <!-- Site Introduction OUTSIDE container -->
   <section class="intro-row">
     <div class="intro">
       <h1>MOVIE LIBRARY</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur sadipscing elit,<br>
-      sed diam nonumy eirmod tempor invidunt ut labore et<br>
-      dolore magna aliquyam erat, sed diam voluptua.</p>
+      <p>
+  Lorem ipsum dolor sit amet, consectetur sadipscing elit,<br class="desktop-br">
+  sed diam nonumy eirmod tempor invidunt ut labore et<br class="desktop-br">
+  dolore magna aliquyam erat, sed diam voluptua.
+</p>
     </div>
   </section>
 
   <div class="container">
-    <!-- Quick Info (Vue.js App) -->
     <section id="app" class="quick-info">
       <div class="quick-info-header">
         <h2>Collect your favourites</h2>
         <div class="search-bar">
           <span class="search-icon"></span>
           <input v-model="searchQuery" @keyup.enter="searchMovies" placeholder="Search title and add to grid" aria-label="Search movies">
+          <ul v-if="showDropdown" class="search-dropdown">
+            <li v-for="movie in searchResults" :key="movie.id" @mousedown.prevent="selectResult(movie)">
+              <img :src="movie.image" :alt="movie.title" style="width:32px;height:48px;object-fit:cover;margin-right:8px;">
+              <span>{{ movie.title }}</span>
+            </li>
+            <li v-if="searching" style="padding: 0.5rem;">Searching...</li>
+            <li v-if="!searching && searchResults.length === 0" style="padding: 0.5rem;">No results</li>
+          </ul>
         </div>
       </div>
       <hr class="quick-info-divider">
